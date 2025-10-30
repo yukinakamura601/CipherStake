@@ -1,4 +1,4 @@
-export const CUSDT_ADDRESS: `0x${string}` = '0x0000000000000000000000000000000000000000';
+export const CUSDT_ADDRESS: `0x${string}` = '0xf7DFe9eF98B03D7f6fEEaA0B1A290ee73ab19925';
 
 export const CUSDT_ABI = [
   {
@@ -649,7 +649,7 @@ export const CUSDT_ABI = [
   }
 ] as const;
 
-export const CIPHERSTAKE_ADDRESS: `0x${string}` = '0x0000000000000000000000000000000000000000';
+export const CIPHERSTAKE_ADDRESS: `0x${string}` = '0x9b7a1293aC100E2DcAA26a8707a7DC0c0F05e7b3';
 
 export const CIPHERSTAKE_ABI = [
   {
