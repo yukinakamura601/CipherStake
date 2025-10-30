@@ -354,6 +354,14 @@ export function StakeApp() {
   return (
     <div className="stake-app">
       <Header />
+
+      {/* Animated background elements */}
+      <div className="background-decoration">
+        <div className="gradient-orb orb-1"></div>
+        <div className="gradient-orb orb-2"></div>
+        <div className="gradient-orb orb-3"></div>
+      </div>
+
       <main className="stake-main">
         <section className="hero">
           <h2>Confidential Staking for cUSDT</h2>
@@ -381,117 +389,184 @@ export function StakeApp() {
           </div>
         )}
 
-        <section className="stats-grid">
-          <div className="stat-card">
-            <span className="stat-label">Wallet Balance</span>
-            <span className="stat-value">
-              {balances.wallet.locked ? 'Locked' : `${balances.wallet.value} cUSDT`}
-            </span>
-          </div>
-          <div className="stat-card">
-            <span className="stat-label">Staked cUSDT</span>
-            <span className="stat-value">
-              {balances.staked.locked ? 'Locked' : `${balances.staked.value} cUSDT`}
-            </span>
-          </div>
-          <div className="stat-card">
-            <span className="stat-label">Total Vaulted</span>
-            <span className="stat-value">
-              {balances.total.locked ? 'Locked' : `${balances.total.value} cUSDT`}
-            </span>
-          </div>
-        </section>
-
-        <section className="actions-grid">
-          <div className="action-card">
-            <h3>Mint cUSDT</h3>
-            <p>Mint freshly issued cUSDT directly to your wallet.</p>
-            <input
-              className="action-input"
-              placeholder="Amount (e.g. 100.5)"
-              value={mintAmount}
-              onChange={(event) => setMintAmount(event.target.value)}
-            />
-            <button
-              onClick={handleMint}
-              disabled={!addressesConfigured || !isConnected || isMinting || !isReady}
-              className="primary-button"
-            >
-              {isMinting ? 'Minting...' : 'Mint'}
-            </button>
-          </div>
-
-          <div className="action-card">
-            <h3>Authorize CipherStake</h3>
-            <p>Grant staking contract permission to transfer your cUSDT for the next 30 days.</p>
-            <button
-              onClick={handleAuthorize}
-              disabled={!addressesConfigured || !isConnected || isAuthorizing || !isReady}
-              className="primary-button"
-            >
-              {isAuthorizing ? 'Authorizing...' : 'Set Operator'}
-            </button>
-          </div>
-
-          <div className="action-card">
-            <h3>Stake cUSDT</h3>
-            <p>Lock encrypted cUSDT into the vault for rewards.</p>
-            <input
-              className="action-input"
-              placeholder="Amount to stake"
-              value={stakeAmount}
-              onChange={(event) => setStakeAmount(event.target.value)}
-            />
-            <button
-              onClick={handleStake}
-              disabled={!addressesConfigured || !isConnected || isStaking || !isReady}
-              className="primary-button"
-            >
-              {isStaking ? 'Staking...' : 'Stake'}
-            </button>
-          </div>
-
-          <div className="action-card">
-            <h3>Withdraw Stake</h3>
-            <p>Withdraw confidential stake back to your wallet.</p>
-            <input
-              className="action-input"
-              placeholder="Amount to withdraw"
-              value={withdrawAmount}
-              onChange={(event) => setWithdrawAmount(event.target.value)}
-            />
-            <button
-              onClick={handleWithdraw}
-              disabled={!addressesConfigured || !isConnected || isWithdrawing || !isReady}
-              className="primary-button"
-            >
-              {isWithdrawing ? 'Withdrawing...' : 'Withdraw'}
-            </button>
-          </div>
-
-          <div className="action-card">
-            <h3>Refresh Access</h3>
-            <p>Re-issue viewing permissions and reload encrypted balances.</p>
-            <button
-              onClick={handleRefreshPermissions}
-              disabled={!addressesConfigured || !isConnected || isRefreshing || !isReady}
-              className="secondary-button"
-            >
-              {isRefreshing ? 'Refreshing...' : 'Refresh Access'}
-            </button>
-            <button
-              onClick={refreshBalances}
-              disabled={!addressesConfigured || !isConnected || isRefreshing}
-              className="ghost-button"
-            >
-              Reload Balances
-            </button>
-          </div>
-        </section>
-
-        {!isConnected && (
-          <div className="empty-state">
+        {!isConnected ? (
+          <div className="empty-state-large">
+            <div className="empty-state-icon">🔒</div>
+            <h3>Connect Your Wallet</h3>
             <p>Connect your wallet to start minting and staking confidential cUSDT.</p>
+          </div>
+        ) : (
+          <div className="layout-grid">
+            {/* Left Panel - Statistics */}
+            <aside className="stats-panel">
+              <div className="stats-panel-header">
+                <h3>Your Portfolio</h3>
+                <button
+                  onClick={refreshBalances}
+                  disabled={!addressesConfigured || isRefreshing}
+                  className="refresh-icon-button"
+                  title="Refresh balances"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                  </svg>
+                </button>
+              </div>
+
+              <div className="stat-large">
+                <div className="stat-large-label">
+                  <span>Wallet Balance</span>
+                  {balances.wallet.locked && <span className="lock-badge">🔒 Locked</span>}
+                </div>
+                <div className="stat-large-value">
+                  {balances.wallet.locked ? '•••••••' : balances.wallet.value}
+                </div>
+                <div className="stat-large-unit">cUSDT</div>
+              </div>
+
+              <div className="stat-divider"></div>
+
+              <div className="stat-medium">
+                <div className="stat-medium-label">
+                  <span>Staked Amount</span>
+                  {balances.staked.locked && <span className="lock-badge-small">🔒</span>}
+                </div>
+                <div className="stat-medium-value">
+                  {balances.staked.locked ? '•••••••' : `${balances.staked.value} cUSDT`}
+                </div>
+              </div>
+
+              <div className="stat-medium">
+                <div className="stat-medium-label">
+                  <span>Total Vaulted</span>
+                  {balances.total.locked && <span className="lock-badge-small">🔒</span>}
+                </div>
+                <div className="stat-medium-value">
+                  {balances.total.locked ? '•••••••' : `${balances.total.value} cUSDT`}
+                </div>
+              </div>
+
+              <button
+                onClick={handleRefreshPermissions}
+                disabled={!addressesConfigured || isRefreshing || !isReady}
+                className="unlock-button"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+                </svg>
+                {isRefreshing ? 'Refreshing Access...' : 'Unlock Encrypted Data'}
+              </button>
+            </aside>
+
+            {/* Right Panel - Actions */}
+            <section className="actions-panel">
+              <div className="action-card-new">
+                <div className="action-header">
+                  <div className="action-icon mint-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <line x1="12" y1="8" x2="12" y2="16"/>
+                      <line x1="8" y1="12" x2="16" y2="12"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3>Mint cUSDT</h3>
+                    <p>Issue fresh confidential tokens to your wallet</p>
+                  </div>
+                </div>
+                <input
+                  className="action-input-new"
+                  placeholder="Amount (e.g. 100.5)"
+                  value={mintAmount}
+                  onChange={(event) => setMintAmount(event.target.value)}
+                />
+                <button
+                  onClick={handleMint}
+                  disabled={!addressesConfigured || !isConnected || isMinting || !isReady}
+                  className="primary-button-new"
+                >
+                  {isMinting ? 'Minting...' : 'Mint Tokens'}
+                </button>
+              </div>
+
+              <div className="action-card-new">
+                <div className="action-header">
+                  <div className="action-icon authorize-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3>Authorize CipherStake</h3>
+                    <p>Grant operator permissions for 30 days</p>
+                  </div>
+                </div>
+                <button
+                  onClick={handleAuthorize}
+                  disabled={!addressesConfigured || !isConnected || isAuthorizing || !isReady}
+                  className="primary-button-new"
+                >
+                  {isAuthorizing ? 'Authorizing...' : 'Set Operator'}
+                </button>
+              </div>
+
+              <div className="action-card-new">
+                <div className="action-header">
+                  <div className="action-icon stake-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3>Stake cUSDT</h3>
+                    <p>Lock tokens into the vault for rewards</p>
+                  </div>
+                </div>
+                <input
+                  className="action-input-new"
+                  placeholder="Amount to stake"
+                  value={stakeAmount}
+                  onChange={(event) => setStakeAmount(event.target.value)}
+                />
+                <button
+                  onClick={handleStake}
+                  disabled={!addressesConfigured || !isConnected || isStaking || !isReady}
+                  className="primary-button-new"
+                >
+                  {isStaking ? 'Staking...' : 'Stake Now'}
+                </button>
+              </div>
+
+              <div className="action-card-new">
+                <div className="action-header">
+                  <div className="action-icon withdraw-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3>Withdraw Stake</h3>
+                    <p>Unstake tokens back to your wallet</p>
+                  </div>
+                </div>
+                <input
+                  className="action-input-new"
+                  placeholder="Amount to withdraw"
+                  value={withdrawAmount}
+                  onChange={(event) => setWithdrawAmount(event.target.value)}
+                />
+                <button
+                  onClick={handleWithdraw}
+                  disabled={!addressesConfigured || !isConnected || isWithdrawing || !isReady}
+                  className="secondary-button-new"
+                >
+                  {isWithdrawing ? 'Withdrawing...' : 'Withdraw'}
+                </button>
+              </div>
+            </section>
           </div>
         )}
       </main>
