@@ -1,20 +1,25 @@
 .header {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.08);
+  transition: all 0.3s ease;
 }
 
 .header-container {
-  max-width: 80rem;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
 }
 
 .header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 0;
+  padding: 1.25rem 0;
 }
 
 .header-left {
@@ -24,30 +29,46 @@
 }
 
 .header-title {
-  font-size: 1.65rem;
-  font-weight: 700;
-  color: #0f172a;
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 70%, #ec4899 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+  margin: 0;
 }
 
 .header-badge {
-  margin-left: 0.75rem;
-  padding: 0.35rem 0.6rem;
+  padding: 0.4rem 0.75rem;
   font-size: 0.75rem;
-  font-weight: 600;
-  background: linear-gradient(135deg, rgba(30, 64, 175, 0.12) 0%, rgba(59, 130, 246, 0.12) 100%);
-  color: #1d4ed8;
+  font-weight: 700;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+  color: #6366f1;
   border-radius: 9999px;
-  border: 1px solid rgba(59, 130, 246, 0.25);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
 }
 
-@media (min-width: 640px) {
+.header-badge:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(139, 92, 246, 0.25) 100%);
+  border-color: rgba(99, 102, 241, 0.5);
+  transform: scale(1.05);
+}
+
+@media (max-width: 640px) {
   .header-container {
-    padding: 0 1.5rem;
+    padding: 0 1rem;
   }
-}
 
-@media (min-width: 1024px) {
-  .header-container {
-    padding: 0 2rem;
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  .header-badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
   }
 }
