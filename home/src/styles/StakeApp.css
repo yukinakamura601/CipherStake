@@ -1,0 +1,210 @@
+.stake-app {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef2ff 0%, rgba(238, 242, 255, 0) 40%);
+}
+
+.stake-main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+}
+
+.hero p {
+  max-width: 680px;
+  margin: 0 auto;
+  color: #334155;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.status-banner {
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.status-banner code {
+  background: rgba(15, 23, 42, 0.08);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.35rem;
+  font-family: 'JetBrains Mono', 'SFMono-Regular', ui-monospace, monospace;
+}
+
+.status-info {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+.status-success {
+  background-color: #ecfdf5;
+  color: #047857;
+}
+
+.status-error {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.stats-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.actions-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.action-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.action-card h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #0f172a;
+}
+
+.action-card p {
+  margin: 0;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.action-input {
+  border-radius: 0.75rem;
+  border: 1px solid #cbd5f5;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: #0f172a;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.action-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button {
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.2s ease;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: white;
+  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.25);
+}
+
+.primary-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(99, 102, 241, 0.35);
+}
+
+.secondary-button {
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+  color: white;
+  box-shadow: 0 12px 24px rgba(14, 165, 233, 0.22);
+}
+
+.secondary-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(14, 165, 233, 0.32);
+}
+
+.ghost-button {
+  background: transparent;
+  color: #1d4ed8;
+  border: 1px dashed rgba(59, 130, 246, 0.4);
+}
+
+.ghost-button:hover:not(:disabled) {
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled,
+.ghost-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.empty-state {
+  margin-top: 2.5rem;
+  text-align: center;
+  padding: 1.75rem;
+  background: #fff;
+  border-radius: 1rem;
+  border: 1px dashed rgba(148, 163, 184, 0.3);
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .stake-main {
+    padding: 2rem 1rem 3.5rem;
+  }
+
+  .hero h2 {
+    font-size: 1.75rem;
+  }
+}
